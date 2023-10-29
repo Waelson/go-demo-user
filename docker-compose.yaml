@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  database:
+    image: mysql
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: usr_user
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: db_user
+
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_PORT: 3306
+      DB_SERVER: database
+      DB_NAME: db_user
+    depends_on:
+      - database

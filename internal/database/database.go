@@ -24,7 +24,6 @@ type database struct {
 
 func (r *database) GetConnection() (*sql.DB, error) {
 	dsn := getDsn()
-	print(dsn)
 	db, err := sql.Open(driver, dsn)
 	if err != nil {
 		return nil, err

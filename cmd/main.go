@@ -43,6 +43,7 @@ func main() {
 		r.Put("/", userController.Update)
 	})
 
+	println("Servidor iniciado na porta 8080")
 	err = http.ListenAndServe(":8080", r)
 	if err != nil {
 		panic(err)
